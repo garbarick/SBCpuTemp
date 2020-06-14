@@ -22,7 +22,14 @@ public class Main extends Activity implements CompoundButton.OnCheckedChangeList
     {
         Switch floating = UITools.findView(this, R.id.floating);
         floating.setOnCheckedChangeListener(this);
-        floating.setChecked(Params.reader(this).getBoolean(Constants.FLOAT, false));
+        if (Floating.enabled(this))
+        {
+            floating.setChecked(Params.reader(this).getBoolean(Constants.FLOAT, false));
+        }
+        else
+        {
+            floating.setEnabled(false);
+        }
     }
 
     @Override

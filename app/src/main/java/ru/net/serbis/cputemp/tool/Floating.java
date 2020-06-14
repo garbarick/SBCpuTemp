@@ -1,6 +1,7 @@
 package ru.net.serbis.cputemp.tool;
 
 import android.content.*;
+import android.os.*;
 import android.provider.*;
 import ru.net.serbis.cputemp.service.*;
 
@@ -10,10 +11,16 @@ public class Floating
     {
         return new Intent(context, FloatingService.class);
     }
+    
+    public static boolean enabled(Context context)
+    {
+        return Build.VERSION.SDK_INT < Build.VERSION_CODES.M ||
+            Settings.canDrawOverlays(context);
+    }
 
     public static void start(Context context)
     {
-        if (Settings.canDrawOverlays(context))
+        if (enabled(context))
         {
             context.startService(get(context));
         }
