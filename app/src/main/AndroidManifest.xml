@@ -18,6 +18,7 @@
             </intent-filter>
         </activity>
         <service android:name=".service.CpuService"/>
+        <service android:name=".service.FloatingService"/>
     </application>
 
 </manifest>
