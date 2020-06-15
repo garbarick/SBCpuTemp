@@ -19,7 +19,7 @@ public class CpuService extends Service
     private final CpuTimer timer = new CpuTimer(1000);;
 
     @Override
-    public IBinder onBind(Intent itent)
+    public IBinder onBind(Intent intent)
     {
         return binder;
     }

@@ -2,65 +2,35 @@ package ru.net.serbis.cputemp;
 
 import android.app.*;
 import android.os.*;
-import android.widget.*;
-import ru.net.serbis.cputemp.data.*;
-import ru.net.serbis.cputemp.tool.*;
+import ru.net.serbis.cputemp.service.*;
+import ru.net.serbis.cputemp.view.*;
 
-public class Main extends Activity implements CompoundButton.OnCheckedChangeListener
+public class Main extends Activity
 {
-    private Connector connector;
+    private CpuConnector cpuConn = new CpuConnector(this);
+    private FloatingConnector floatingConn = new FloatingConnector();
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
-        initFloating();
+        new Floating(this, floatingConn);
+        new Mover(this, floatingConn);
     }
-
-    private void initFloating()
-    {
-        Switch floating = UITools.findView(this, R.id.floating);
-        floating.setOnCheckedChangeListener(this);
-        if (Floating.enabled(this))
-        {
-            floating.setChecked(Params.reader(this).getBoolean(Constants.FLOAT, false));
-        }
-        else
-        {
-            floating.setEnabled(false);
-        }
-    }
-
-    @Override
-    public void onCheckedChanged(CompoundButton button, boolean value)
-    {
-        if (value)
-        {
-            Floating.start(this);
-        }
-        else
-        {
-            Floating.stop(this);
-        }
-        Params.writer(this)
-            .putBoolean(Constants.FLOAT, value)
-            .commit();
-    }
-    
 
     @Override
     protected void onStart()
     {
         super.onStart();
-        connector = new Connector(this);
-        connector.bind(this);
+        cpuConn.bind(this);
     }
 
     @Override
     protected void onStop()
     {
         super.onStop();
-        connector.unBind(this);
+        cpuConn.unBind(this);
+        floatingConn.unBind(this);
     }
 }
