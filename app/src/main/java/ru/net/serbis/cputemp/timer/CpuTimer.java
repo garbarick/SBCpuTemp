@@ -7,12 +7,11 @@ import ru.net.serbis.cputemp.tool.*;
 public class CpuTimer extends Handler
 {
     private int interval;
+    private int value;
     private List<Listener> listeners = new ArrayList<Listener>();
     
     private Runnable runnable = new Runnable()
     {
-        private int last = -1;
-        
         @Override
         public void run()
         {
@@ -34,12 +33,12 @@ public class CpuTimer extends Handler
                 return;
             }
             int cur = CpuTools.getTemp();
-            if (cur == last)
+            if (cur == value)
             {
                 return;
             }
-            last = cur;
-            onChange(last);
+            value = cur;
+            onChange(value);
         }
     };   
 
@@ -51,6 +50,7 @@ public class CpuTimer extends Handler
     public synchronized void addListener(Listener listener)
     {
         excludeListener(listener);
+        listener.onChange(value);
         listeners.add(listener);
     }
 
