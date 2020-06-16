@@ -31,7 +31,7 @@ public class FloatingService extends Service
         super.onCreate();
 
         position = new Position(this);
-        connector = new CpuConnector(position.getView());
+        connector = new CpuConnector(this, position.getView());
         connector.bind(this);
     }
 

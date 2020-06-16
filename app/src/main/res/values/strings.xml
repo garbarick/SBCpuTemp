@@ -3,5 +3,6 @@
 
     <string name="app">SBCpuTemp</string>
     <string name="floating">Floating</string>
+    <string name="super_user">Super User</string>
 
 </resources>

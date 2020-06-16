@@ -8,13 +8,15 @@ import ru.net.serbis.cputemp.timer.*;
 
 public class CpuConnector extends Connector
 {
+    private Context context;
     private Object view;
     private CpuTimer timer;
     private Listener listener;
 
-    public CpuConnector(Object view)
+    public CpuConnector(Context context, Object view)
     {
         super(CpuService.class);
+        this.context = context;
         this.view = view;
     }
 
@@ -26,7 +28,7 @@ public class CpuConnector extends Connector
         CpuService.ThisBinder binder = (CpuService.ThisBinder) service;
         timer = binder.getTimer();
         listener = new UIListener(view, R.id.value);
-        timer.addListener(listener);
+        timer.addListener(context, listener);
     }
 
     @Override

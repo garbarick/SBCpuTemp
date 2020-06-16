@@ -7,7 +7,7 @@ import ru.net.serbis.cputemp.view.*;
 
 public class Main extends Activity
 {
-    private CpuConnector cpuConn = new CpuConnector(this);
+    private CpuConnector cpuConn;
     private FloatingConnector floatingConn = new FloatingConnector();
 
     @Override
@@ -15,6 +15,9 @@ public class Main extends Activity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
+        
+        cpuConn = new CpuConnector(this, this);
+        new SuperUser(this, cpuConn);
         new Floating(this, floatingConn);
         new Mover(this, floatingConn);
     }

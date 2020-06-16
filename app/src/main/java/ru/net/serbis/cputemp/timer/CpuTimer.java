@@ -1,13 +1,16 @@
 package ru.net.serbis.cputemp.timer;
 
+import android.content.*;
 import android.os.*;
 import java.util.*;
 import ru.net.serbis.cputemp.tool.*;
+import ru.net.serbis.cputemp.*;
 
 public class CpuTimer extends Handler
 {
     private int interval;
     private int value;
+    private boolean superUser;
     private List<Listener> listeners = new ArrayList<Listener>();
     
     private Runnable runnable = new Runnable()
@@ -32,7 +35,7 @@ public class CpuTimer extends Handler
             {
                 return;
             }
-            int cur = CpuTools.getTemp();
+            int cur = CpuTools.getTemp(superUser);
             if (cur == value)
             {
                 return;
@@ -47,8 +50,10 @@ public class CpuTimer extends Handler
         this.interval = interval;
     }
 
-    public synchronized void addListener(Listener listener)
+    public synchronized void addListener(Context context, Listener listener)
     {
+        superUser = Params.reader(context).getBoolean(Constants.SU, false);
+        
         excludeListener(listener);
         listener.onChange(value);
         listeners.add(listener);

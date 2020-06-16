@@ -6,5 +6,6 @@ public interface Constants
     String FLOAT = "float";
     String FLOAT_X = "float_x";
     String FLOAT_Y = "float_y";
+    String SU = "su";
     int SYSTEM_ALERT_WINDOW_PERMISSION = 2084;
 }

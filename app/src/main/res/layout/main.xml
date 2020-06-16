@@ -19,6 +19,13 @@
 		android:id="@+id/floating"
 		android:layout_margin="30dp"/>
 
+	<Switch
+		android:layout_height="wrap_content"
+		android:layout_width="wrap_content"
+		android:text="@string/super_user"
+		android:id="@+id/superUser"
+		android:layout_marginBottom="30dp"/>
+
 	<ImageView
 		android:layout_height="wrap_content"
 		android:layout_width="wrap_content"

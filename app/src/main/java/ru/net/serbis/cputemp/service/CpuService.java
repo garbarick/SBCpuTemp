@@ -4,6 +4,7 @@ import android.app.*;
 import android.content.*;
 import android.os.*;
 import ru.net.serbis.cputemp.timer.*;
+import ru.net.serbis.cputemp.tool.*;
 
 public class CpuService extends Service
 {

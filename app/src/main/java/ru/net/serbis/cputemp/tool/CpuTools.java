@@ -4,12 +4,20 @@ import java.io.*;
 
 public class CpuTools
 {
-    public static int getTemp()
+    private static final String SUC = "su -c ";
+    private static final String CPU_TEMP = "cat sys/class/thermal/thermal_zone0/temp";
+    
+    public static int getTemp(boolean superUser)
     {
         BufferedReader reader = null;
         try
         {
-            Process process = Runtime.getRuntime().exec("cat sys/class/thermal/thermal_zone0/temp");
+            String command = CPU_TEMP;
+            if (superUser)
+            {
+                command = SUC + command;
+            }
+            Process process = Runtime.getRuntime().exec(command);
             process.waitFor();
             reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
             String line = reader.readLine();

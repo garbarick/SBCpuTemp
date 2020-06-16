@@ -40,16 +40,16 @@ public class Mover implements View.OnClickListener
         switch(view.getId())
         {
             case R.id.up:
-                conn.getPosition().moveUp(10);
+                conn.getPosition().move(0, -10);
                 break;
             case R.id.down:
-                conn.getPosition().moveDown(10);
+                conn.getPosition().move(0, 10);
                 break;
             case R.id.left:
-                conn.getPosition().moveLeft(10);
+                conn.getPosition().move(-10, 0);
                 break;
             case R.id.right:
-                conn.getPosition().moveRight(10);
+                conn.getPosition().move(10, 0);
                 break;
         }
     }
