@@ -22,6 +22,7 @@ public class Position implements View.OnTouchListener
         view = LayoutInflater.from(context).inflate(R.layout.floating, null);
         initSize();
         initParams();
+        initBackground();
         view.setOnTouchListener(this);
     }
 
@@ -32,7 +33,7 @@ public class Position implements View.OnTouchListener
 
     private void initParams()
     {
-        params = new WindowManager.LayoutParams(
+        params = new LayoutParams(
             LayoutParams.WRAP_CONTENT,
             LayoutParams.WRAP_CONTENT,
             LayoutParams.TYPE_SYSTEM_ERROR,
@@ -113,5 +114,23 @@ public class Position implements View.OnTouchListener
     public void removeView()
     {
         manager.removeView(view);
+    }
+
+    public void initBackground()
+    {
+        int value = 0;
+        switch(Params.reader(context).getInt(Constants.BACKGROUND, 0))
+        {
+            case 1:
+                value = R.drawable.rounded_transparent;
+                break;
+            case 2:
+                value = R.drawable.rounded_solid;
+                break;
+            case 3:
+                value = R.drawable.rounded;
+                break;
+        }
+        view.setBackgroundResource(value);
     }
 }

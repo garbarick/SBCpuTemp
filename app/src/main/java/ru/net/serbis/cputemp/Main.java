@@ -20,6 +20,7 @@ public class Main extends Activity
         new SuperUser(this, cpuConn);
         new Floating(this, floatingConn);
         new Mover(this, floatingConn);
+        new Background(this, floatingConn);
     }
 
     @Override

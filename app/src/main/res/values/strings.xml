@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
     <string name="app">SBCpuTemp</string>
     <string name="floating">Floating</string>
     <string name="super_user">Super User</string>
-
+    <string name="background">Background</string>
+    <string-array name="backgrounds">
+        <item>None</item>
+        <item>Borders</item>
+        <item>Gray</item>
+        <item>Gray With Borders</item>
+    </string-array>
 </resources>
